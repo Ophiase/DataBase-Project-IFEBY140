@@ -1,0 +1,18 @@
+project:
+  output-dir: _output
+  type: book
+
+book:
+  title : "Report - DataBase Project - IFEBY140"
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+  pdf:
+    theme: cosmo
+    title: "Report_DataBase_Project_IFEBY270"
+    toc: true
