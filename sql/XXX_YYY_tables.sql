@@ -44,3 +44,5 @@ SET client_min_messages TO WARNING;
 
 -----------------------------------------------------------------
 -- Populate tables
+
+\i populate.sql
