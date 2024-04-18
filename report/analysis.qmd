@@ -1,0 +1,57 @@
+---
+title: Analyzis
+---
+
+```{python}
+#| echo: false
+import os
+import numpy as np
+import pandas as pd
+pd.set_option('display.max_columns', 50)
+```
+
+```{python}
+#| echo: false
+df = pd.read_csv('../data/que-faire-a-paris-.csv', delimiter=';')
+```
+
+Initial Columns :
+```{python}
+#| echo: false
+print(df.columns.values)
+```
+
+<!-- Heading of the original dataset : -->
+```{python}
+#| echo: false
+#print(df.head(2))
+```
+
+## Redudant Attributes
+
+We will remove the following attributes : description_de_la_date
+
+## First Normal Form
+
+Non atomic attributs :
+
+- List
+    - Occurences : separated by '_' (underscore)
+    - Tags : separated by ','
+    - Childrens : separated by ','
+- Multiple attributes
+    - Transport : transport_type,  transport_line, station, distance
+    - Geographic_Coordinates : longitude, latitude
+
+## Functional dependencies :
+- id $\to$ url 
+    - For simplicty sake, we consider that we cannot deduce id from url. Perhaps, we will use this property to insert identify sub_events in "childrens"
+- id $\to$ titre, chapeau, description, date_de_debut, date_de_fin, occurences, url_de_l_image, texte_alternatif_de_l_image, credit_de_l_image, mots_clefs, nom_du_lieu, adresse_du_lieu, code_postale, ville, url_du_contact, telephone_de_contact, email_de_contact, url_facebook_associee, url_twitter_associe, type_de_prix, detail_du_prix, type_d_acces, url_de_reservation, url_de_reservation_texte, date_de_mise_a_jour, image_de_couverture, programmes, en_ligne_address_url, en_ligne_address_url_text, en_ligne_address_text, title_event, audience, childrens, groupe, transport_type,  transport_line, station, distance
+- date_de_debut, date_de_fin $\to$ description_de_la_date
+    - Removed attribute
+- adresse_du_lieu, ville, code_postale $\to$ coordonnees_geographiques
+- nom_du_lieu, adresse_du_lieu, ville, code_postale -> acces_pmr, acces_mal_voyant, acces_mal_entendant
+
+## Misc
+
+We decide to translate everything to english.
