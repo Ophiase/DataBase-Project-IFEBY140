@@ -5,7 +5,6 @@
 \set length_url 256
 \set length_title 128
 \set length_description 2048
-\set length_address 64
 
 -----------------------------------------------------------------
 -- CLEAN
@@ -57,9 +56,12 @@ CREATE TABLE
         address_url_text VARCHAR(:length_description), 
         address_text VARCHAR(:length_description),
         --
-            CONSTRAINT date_coherence 
-                CHECK (
-                    date_end IS NULL OR  
-                    date_begin IS NULL OR 
-                    date_end >= date_begin)
+        CONSTRAINT date_coherence 
+            CHECK (
+                date_end IS NULL OR  
+                date_begin IS NULL OR 
+                date_end >= date_begin),
+
+        FOREIGN KEY (address_name, address_street, address_zipcode, address_city)
+        REFERENCES address_table(address_name, address_street, address_zipcode, address_city)
     );

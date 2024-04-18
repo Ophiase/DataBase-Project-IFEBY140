@@ -2,6 +2,8 @@
 \! echo - address_table ...
 \! echo ---------------------
 
+\set length_address 64
+
 -----------------------------------------------------------------
 -- CLEAN
 
@@ -9,8 +11,6 @@ DROP TABLE IF EXISTS address_table CASCADE;
 
 -----------------------------------------------------------------
 -- TABLES
-
-\! echo "Warning, TODO: foreign key for the primary key"
 
 CREATE TABLE address_table (
     address_name VARCHAR(:length_address), 
@@ -22,11 +22,9 @@ CREATE TABLE address_table (
     deaf BOOLEAN,
 
     PRIMARY KEY (address_name, address_street, address_zipcode, address_city),
-
-    -- CONSTRAINT fk_event_address
-    --     FOREIGN KEY (address_name, address_street, address_zipcode, address_city)
-    --     REFERENCES event_table(address_name, address_street, address_zipcode, address_city),
-
+    FOREIGN KEY (address_street, address_zipcode, address_city)
+        REFERENCES geographic_correspondance(address_street, address_zipcode, address_city),
+    
     CONSTRAINT useful_row CHECK (
         pmr IS NOT NULL OR 
         blind IS NOT NULL OR
