@@ -8,7 +8,9 @@
 DROP TABLE IF EXISTS temp_event CASCADE;
 
 -----------------------------------------------------------------
--- TABLES
+-- EXTRACT CSV
+
+\! echo "EXTRACT FROM CSV"
 
 CREATE TEMPORARY TABLE temp_event (
     event_id SERIAL PRIMARY KEY,
@@ -66,7 +68,7 @@ CREATE TEMPORARY TABLE temp_event (
     audience VARCHAR(:length_description), 
     --
     childrens TEXT,
-    which_group TEXT
+    group_name TEXT
     );
 
 \COPY temp_event FROM 'que-faire-a-paris-.csv' DELIMITER ';' CSV HEADER;
@@ -85,3 +87,19 @@ CREATE TEMPORARY TABLE temp_event (
 --     image_couverture, address_text, title_event, 
 --     address_url_text, audience, childrens
 -- ) FROM 'que-faire-a-paris-.csv' DELIMITER ';' CSV HEADER;
+
+-----------------------------------------------------------------
+-- 1NF
+
+\! echo "---"
+\! echo "[1NF transformation]"
+
+-- • MULTIPLE ATTRIBUTES
+    -- Transport : transport_type, transport_line, station, distance
+    -- Geographic_Coordinates : longitude, latitud
+
+-- • LIST
+    -- Occurences : separated by ’_’ (underscore)
+    -- Tags : separated by ‘,’
+    -- Childrens : separated by ‘,’
+
