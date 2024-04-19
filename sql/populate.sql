@@ -217,3 +217,27 @@ FROM
     ON temp_event.event_id = et.event_id
 ON CONFLICT DO NOTHING;
 
+-----------------------------------------------------------------
+\! echo POPULATE: tag
+
+INSERT INTO tag (event_id, keyword)
+SELECT 
+    et.event_id, 
+    (string_to_array(keyword, ',')) 
+    AS keyword
+FROM 
+    temp_event
+    RIGHT JOIN event_table et 
+    ON temp_event.event_id = et.event_id
+WHERE
+    keyword IS NOT NULL
+ON CONFLICT DO NOTHING;
+
+-----------------------------------------------------------------
+\! echo POPULATE: sub_event
+
+\! echo "TODO !"
+
+-----------------------------------------------------------------
+\! echo POPULATE: transport
+
