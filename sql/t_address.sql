@@ -21,11 +21,13 @@ CREATE TABLE address_table (
 
     PRIMARY KEY (address_name, address_street, address_zipcode, address_city),
     FOREIGN KEY (address_street, address_zipcode, address_city)
-        REFERENCES geographic_correspondance(address_street, address_zipcode, address_city),
+        REFERENCES geographic_correspondance(address_street, address_zipcode, address_city)
     
+    /*
     CONSTRAINT useful_row CHECK (
         pmr IS NOT NULL OR 
         blind IS NOT NULL OR
         deaf IS NOT NULL
     )
+    */
 );

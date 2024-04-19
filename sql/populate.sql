@@ -88,18 +88,79 @@ CREATE TEMPORARY TABLE temp_event (
 --     address_url_text, audience, childrens
 -- ) FROM 'que-faire-a-paris-.csv' DELIMITER ';' CSV HEADER;
 
+
+/*
+table creation order :
+
+t_geographic_correspondance.sql
+t_address.sql
+
+t_event_table.sql
+
+t_occurence.sql
+t_tag.sql
+t_sub_event.sql
+t_transport.sql
+
+*/
+
 -----------------------------------------------------------------
--- 1NF
 
-\! echo "---"
-\! echo "[1NF transformation]"
+/* TODO:
+    \! echo "---"
+    \! echo "[1NF transformation]"
+    -- • LIST
+        -- Occurences : separated by ’_’ (underscore)
+        -- Tags : separated by ‘,’
+        -- Childrens : separated by ‘,’
+        -- Transport : separated by '\n'
 
--- • MULTIPLE ATTRIBUTES
-    -- Transport : transport_type, transport_line, station, distance
-    -- Geographic_Coordinates : longitude, latitud
+    -- • MULTIPLE ATTRIBUTES
+        -- Transport : transport_type, transport_line, station, distance
+        -- Geographic_Coordinates : longitude, latitude
+*/
 
--- • LIST
-    -- Occurences : separated by ’_’ (underscore)
-    -- Tags : separated by ‘,’
-    -- Childrens : separated by ‘,’
+INSERT INTO geographic_correspondance (
+    address_street, address_zipcode, address_city, lat, lon
+)
+SELECT
+    address_street,
+    address_zipcode,
+    address_city,
+    CAST(split_part(geographic_coordinate, ',', 1) AS FLOAT) AS lat,
+    CAST(split_part(geographic_coordinate, ',', 2) AS FLOAT) AS lon
+FROM temp_event
+WHERE address_street IS NOT NULL -- TODO find address using geocode 
+ON CONFLICT DO NOTHING;
 
+--
+
+INSERT INTO address_table (
+    address_name, address_street, address_zipcode, address_city,
+    pmr, blind, deaf
+)
+SELECT address_name, address_street, address_zipcode, address_city,
+    (CASE
+        WHEN pmr = 't' THEN TRUE
+        WHEN pmr = 'f' THEN FALSE
+        ELSE NULL
+    END) AS pmr, 
+    (CASE
+        WHEN blind = 't' THEN TRUE
+        WHEN blind = 'f' THEN FALSE
+        ELSE NULL
+    END) AS blind,
+    (CASE
+        WHEN deaf = 't' THEN TRUE
+        WHEN deaf = 'f' THEN FALSE
+        ELSE NULL
+    END) AS deaf
+FROM temp_event
+WHERE 
+    (address_name, address_street, address_zipcode, address_city) 
+    IS NOT NULL
+ON CONFLICT DO NOTHING;
+
+-- SELECT event_id, unnest(string_to_array(occurence_date, ';')) AS occurence_date
+-- FROM event_description;
+    
