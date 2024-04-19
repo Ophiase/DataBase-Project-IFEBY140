@@ -18,7 +18,7 @@ CREATE TEMPORARY TABLE temp_event (
     event_url VARCHAR(:length_url) NOT NULL UNIQUE,
     title TEXT NOT NULL,
     lead_text VARCHAR(:length_description),
-    event_description TEXT, 
+    event_description TEXT,
     --
     date_begin TIMESTAMP DEFAULT NULL,
     date_end TIMESTAMP DEFAULT NULL,
@@ -160,6 +160,38 @@ WHERE
     (address_name, address_street, address_zipcode, address_city) 
     IS NOT NULL
 ON CONFLICT DO NOTHING;
+
+INSERT INTO event_table(
+    event_id, event_url, title, event_description,
+    date_begin, lead_text, date_end, 
+    cover_url, cover_credit, 
+    cover_alt, address_name, address_zipcode, 
+    address_street, address_city,
+    contact_phone, contact_facebook, contact_url, 
+    contact_mail, price_detail, contact_twitter, 
+    access_link, price_type, updated_at, access_type, 
+    programs, access_link_text, address_url, 
+    image_couverture, address_text, title_event, 
+    address_url_text, audience
+) SELECT
+    event_id, event_url, title, event_description, 
+    date_begin, lead_text, date_end, 
+    cover_url, cover_credit, 
+    cover_alt, address_name, address_zipcode, 
+    address_street, address_city,
+    contact_phone, contact_facebook, contact_url, 
+    contact_mail, price_detail, contact_twitter, 
+    access_link, price_type, updated_at, access_type, 
+    programs, access_link_text, address_url, 
+    image_couverture, address_text, title_event, 
+    address_url_text, audience
+FROM temp_event
+WHERE
+    (
+        date_end IS NULL OR  
+        date_begin IS NULL OR 
+        date_end >= date_begin
+    );
 
 -- SELECT event_id, unnest(string_to_array(occurence_date, ';')) AS occurence_date
 -- FROM event_description;

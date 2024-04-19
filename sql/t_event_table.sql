@@ -25,7 +25,7 @@ CREATE TABLE
         date_begin TIMESTAMP DEFAULT NULL,
         date_end TIMESTAMP DEFAULT NULL,
         --
-        event_description VARCHAR(:length_description), 
+        event_description TEXT, 
         cover_url VARCHAR(:length_url), 
         cover_alt VARCHAR(:length_description), 
         cover_credit VARCHAR(:length_description), 
@@ -38,7 +38,7 @@ CREATE TABLE
         price_type VARCHAR(:length_description), 
         price_detail VARCHAR(:length_description), 
         access_type VARCHAR(:length_description), 
-        access_link VARCHAR(:length_url), 
+        access_link TEXT, 
         access_link_text VARCHAR(:length_description), 
         updated_at TIMESTAMP, 
         image_couverture VARCHAR(:length_url), 
