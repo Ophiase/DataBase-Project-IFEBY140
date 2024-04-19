@@ -46,3 +46,8 @@ SET client_min_messages TO WARNING;
 -- Populate tables
 
 \i populate.sql
+
+-----------------------------------------------------------------
+-- Show anomalies
+
+\i XXX_YYY_anomalies.sql
