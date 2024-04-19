@@ -2,9 +2,9 @@
 \! echo - event ...
 \! echo ---------------------
 
-\set length_url 256
-\set length_title 128
-\set length_description 2048
+\set length_url 512
+\set length_title 256
+\set length_description 4096
 
 -----------------------------------------------------------------
 -- CLEAN

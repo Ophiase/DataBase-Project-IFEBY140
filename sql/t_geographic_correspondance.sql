@@ -2,7 +2,7 @@
 \! echo - geographic_correspondance ...
 \! echo ---------------------
 
-\set length_address 64
+\set length_address 128
 
 -----------------------------------------------------------------
 -- CLEAN
