@@ -5,7 +5,6 @@
 \set length_url 512
 \set length_title 256
 \set length_description 4096
-\set length_keyword 64
 
 -----------------------------------------------------------------
 -- CLEAN
@@ -30,8 +29,6 @@ CREATE TABLE
         cover_url VARCHAR(:length_url), 
         cover_alt VARCHAR(:length_description), 
         cover_credit VARCHAR(:length_description), 
-        --
-        keyword VARCHAR(:length_keyword),
         --
         address_name VARCHAR(:length_address), 
         address_street VARCHAR(:length_address), 
