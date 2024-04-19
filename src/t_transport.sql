@@ -16,7 +16,8 @@ CREATE TABLE
     transport (
         event_id INT,
         transport_type VARCHAR(:transport_description_length),
-        transport_line VARCHAR(:transport_description_length),
+        transport_line VARCHAR(:transport_description_length) DEFAULT "",
+        -- Velibs doesn't have line
         station VARCHAR(:transport_description_length),
         distance FLOAT,
         --
