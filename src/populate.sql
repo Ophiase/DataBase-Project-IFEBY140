@@ -240,3 +240,15 @@ ON CONFLICT DO NOTHING;
 
 -----------------------------------------------------------------
 \! echo POPULATE: transport
+
+-- SEE tmp.sql
+
+-- INSERT INTO transport (
+--     event_id, transport_type, transport_line, 
+--     station, distance)
+
+-- SELECT * FROM
+-- (
+
+-- ) AS t
+-- -- ON CONFLICT DO NOTHING;

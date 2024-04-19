@@ -39,6 +39,7 @@ Non atomic attributs :
     - Occurences : separated by '_' (underscore)
     - Tags : separated by ','
     - Childrens : separated by ','
+    - Transport : separated by E'\n'
 - Multiple attributes
     - Transport : transport_type,  transport_line, station, distance
     - Geographic_Coordinates : longitude, latitude
