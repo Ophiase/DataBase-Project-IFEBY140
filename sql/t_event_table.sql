@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS event_table CASCADE;
 
 CREATE TABLE
     event_table (
-        event_id SERIAL PRIMARY KEY,
+        event_id INT PRIMARY KEY,
         --
         event_url VARCHAR(:length_url) NOT NULL UNIQUE,
         title VARCHAR(:length_title) NOT NULL,

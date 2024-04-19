@@ -37,7 +37,7 @@ SET client_min_messages TO WARNING;
 \i t_geographic_correspondance.sql
 \i t_address.sql
 \i t_event_table.sql
-\i t_occurence.sql
+\i t_occurrence.sql
 \i t_tag.sql
 \i t_sub_event.sql
 \i t_transport.sql

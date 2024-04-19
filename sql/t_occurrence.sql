@@ -1,21 +1,21 @@
 \! echo ---------------------
-\! echo - occurence ...
+\! echo - occurrence ...
 \! echo ---------------------
 
 -----------------------------------------------------------------
 -- CLEAN
 
-DROP TABLE IF EXISTS occurence CASCADE;
+DROP TABLE IF EXISTS occurrence CASCADE;
 
 -----------------------------------------------------------------
 -- TABLES
 
 CREATE TABLE
-    occurence (
+    occurrence (
         event_id INT,
-        occurence_date TIMESTAMP,
+        occurrence_date TIMESTAMP,
         --
-        PRIMARY KEY (event_id, occurence_date),
+        PRIMARY KEY (event_id, occurrence_date),
         FOREIGN KEY (event_id)
             REFERENCES event_table(event_id)
     );

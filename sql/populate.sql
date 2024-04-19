@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS temp_event CASCADE;
 \! echo "EXTRACT FROM CSV"
 
 CREATE TEMPORARY TABLE temp_event (
-    event_id SERIAL PRIMARY KEY,
+    event_id INT PRIMARY KEY,
     --
     event_url VARCHAR(:length_url) NOT NULL UNIQUE,
     title TEXT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TEMPORARY TABLE temp_event (
     date_begin TIMESTAMP DEFAULT NULL,
     date_end TIMESTAMP DEFAULT NULL,
     --
-    occurence_date TEXT,  
+    occurrence_date TEXT,  
     date_description VARCHAR(:length_description),
     --
     cover_url VARCHAR(:length_url), 
@@ -76,7 +76,7 @@ CREATE TEMPORARY TABLE temp_event (
 -- \COPY temp_event(
 --     event_id, title, event_description, event_url, 
 --     date_begin, lead_text, date_description, date_end, 
---     cover_url, occurence_date, cover_credit, keyword, 
+--     cover_url, occurrence_date, cover_credit, keyword, 
 --     cover_alt, address_name, address_zipcode, 
 --     address_street, address_city, blind, 
 --     geographic_coordinate, pmr, deaf, contact_phone, 
@@ -97,7 +97,7 @@ t_address.sql
 
 t_event_table.sql
 
-t_occurence.sql
+t_occurrence.sql
 t_tag.sql
 t_sub_event.sql
 t_transport.sql
@@ -110,7 +110,7 @@ t_transport.sql
     \! echo "---"
     \! echo "[1NF transformation]"
     -- • LIST
-        -- Occurences : separated by ’_’ (underscore)
+        -- occurrences : separated by ’_’ (underscore)
         -- Tags : separated by ‘,’
         -- Childrens : separated by ‘,’
         -- Transport : separated by '\n'
@@ -119,6 +119,10 @@ t_transport.sql
         -- Transport : transport_type, transport_line, station, distance
         -- Geographic_Coordinates : longitude, latitude
 */
+
+-----------------------------------------------------------------
+\! echo POPULATE: geographic_correspondance
+
 
 INSERT INTO geographic_correspondance (
     address_street, address_zipcode, address_city, lat, lon
@@ -133,7 +137,8 @@ FROM temp_event
 WHERE address_street IS NOT NULL -- TODO find address using geocode 
 ON CONFLICT DO NOTHING;
 
---
+-----------------------------------------------------------------
+\! echo POPULATE: address_table
 
 INSERT INTO address_table (
     address_name, address_street, address_zipcode, address_city,
@@ -160,6 +165,9 @@ WHERE
     (address_name, address_street, address_zipcode, address_city) 
     IS NOT NULL
 ON CONFLICT DO NOTHING;
+
+-----------------------------------------------------------------
+\! echo POPULATE: event_table
 
 INSERT INTO event_table(
     event_id, event_url, title, event_description,
@@ -193,6 +201,19 @@ WHERE
         date_end >= date_begin
     );
 
--- SELECT event_id, unnest(string_to_array(occurence_date, ';')) AS occurence_date
--- FROM event_description;
-    
+-----------------------------------------------------------------
+\! echo POPULATE: occurrence
+
+INSERT INTO occurrence (event_id, occurrence_date)
+SELECT 
+    et.event_id, 
+    to_timestamp(
+        unnest(string_to_array(occurrence_date, '_')), 
+        'YYYY-MM-DD"T"HH24:MI:SS.ff3"Z"'
+    ) AS occurrence_date
+FROM 
+    temp_event
+    RIGHT JOIN event_table et 
+    ON temp_event.event_id = et.event_id
+ON CONFLICT DO NOTHING;
+
