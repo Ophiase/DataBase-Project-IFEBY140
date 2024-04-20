@@ -3,6 +3,9 @@
 \echo [PART 1]
 \echo
 
+\echo Number of events :
+SELECT COUNT(event_id) FROM event_table;
+
 \echo Number of events with pmr, blind or deaf access :
 
 SELECT COUNT(event_id) 

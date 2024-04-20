@@ -7,18 +7,73 @@ See the interactive preview of the data with :
 \i XXX_YYY_data.sql
 ```
 
-### Number of events with pmr, blind or deaf access :
-```sql
-SELECT COUNT(event_id) 
-FROM event_table
-WHERE (
-    address_name,
-    address_street, 
-    address_zipcode, 
-    address_city
-) IN (
-    SELECT address_name, address_street, address_zipcode, address_city
-    FROM address_table
-    WHERE (pmr=TRUE) OR (deaf=TRUE) OR (blind=TRUE) 
-);
-```
+## Outputs
+
+### Statistics
+
+Number of events : 2816
+
+Number of events with pmr, blind or deaf access : 432
+
+Number of events accessibles with "Vélib" : 264
+
+Number of events with multiple transports : 266
+
+### The 10 station with the most events
+
+ count | transport_type | transport_line |                 station                  
+-------+----------------+----------------+------------------------------------------
+    75 | Bus            |  29618791      |  Lyon / Daumesnil - Ledru Rollin (Paris)
+    75 | Métro          |  1             |  Bastille (Paris)
+    75 | Vélib          |                |  Lacuée - Lyon
+    55 | Vélib          |                |  Boyer - Ménilmontant
+    30 | Bus            |  2696          |  Pyrénées - Ménilmontant (Paris)
+    30 | Métro          |  11            |  Jourdain (Paris)
+    29 | Bus            |  397089        |  Volontaires - Lecourbe (Paris)
+    29 | Vélib          |                |  Volontaire - Lecourbe
+    29 | Métro          |  12            |  Volontaires (Paris)
+    25 | Métro          |  3             |  Gambetta (Paris)
+
+###  The title of the 10 events with the most occurrences
+ 
+ count |  id   |                                    title                                     
+-------+-------+------------------------------------------------------------------------------
+  9970 | 41529 | Un parcours sonore et urbain
+  4031 | 37301 | La Cité de l'Histoire, l'expérience immersive à travers l'Histoire de France
+   641 | 31363 | Une plongée immersive avec les baleines à l'Aquarium tropical
+   634 | 11871 | Revivre, les animaux disparus en réalité augmentée
+   572 | 42634 | « Notre-Dame de Paris : au cœur du chantier »
+   552 | 53785 | Montmartre Enchanté insolite : la visite chantée et commentée
+   511 | 32056 | Mémorial de l'ancienne gare de déportation de Bobigny
+   379 | 32135 | Exposition " Notre-Dame de Paris. Des bâtisseurs aux restaurateurs."
+   352 | 50933 | Sauvez le cinéma, l'escape game du Grand Rex
+   342 | 31054 | « Félins » au Muséum national d'Histoire naturelle
+
+###  The 10 most used tag
+ 
+ count |   keyword   
+-------+-------------
+   641 | Musique
+   623 | Concert
+   503 | Atelier
+   454 | Enfants
+   393 | Loisirs
+   312 | Sport
+   265 | Expo
+   240 | Conférence
+   234 | Théâtre
+   179 | Littérature
+
+### The 10 biggest group
+ 
+ count |      group_name      
+-------+----------------------
+  1184 | Aucun
+   634 | Bibliothèques
+   602 | Agenda
+   214 | Activités DJS
+    74 | Centres d'animations
+    49 | Parcs et jardins
+    23 | Nuit Blanche
+    22 | Associations
+    14 | Musées

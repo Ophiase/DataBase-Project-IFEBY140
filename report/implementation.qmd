@@ -17,7 +17,9 @@ Create tables and populate them with :
 
 ## Code Details
 
-### Transports
+We ignore most redudancy errors using ``ON CONFLICT DO NOTHING``.
+
+### Populate Transports
 Raw transport line :
 ```
 "Métro -> 1 : Bastille (Paris) (304m)
@@ -26,8 +28,29 @@ Vélib -> Lacuée - Lyon (121.91m)
 <a href=""https://www.geovelo.fr/paris/route?to=2.370458543300628,48.849268481958404"">Calculez votre itinéraire sur GéoVélo</a>"
 ```
 
-### Sub Events
+1. List $\to$ Row
+    - Split over line jump using : 
+    ``unnest(string_to_array(transport, E'\n')) AS transport``
+2. Remove unnecessary HTML content
+    - ``WHERE transport NOT LIKE '<%'``
+3. Extract (transport_type, transport_line, station + distance)
+    - use ``split_part`` over ``->`` and ``:``
+4. ``Vélib`` case
+    - If station is empty, it means it is a ``Vélib``, and the station was wrongly splited into transport_line.
+    Then we swawp ``station`` and ``transport_line``
+5. Extract distance
+    - It can be done using a combination of ``substring``, ``reverse`` and ``length`` functions.
+    - Distance information is always between the last occurence of ``(`` and ``m)``.
+
+### Populate Sub-Events
 Raw sub event line example:
 ```
 "Rencontre avec Jørn Lier Horst (https://www.paris.fr/evenements/rencontre-avec-jorn-lier-horst-52356);Raconte-moi une histoire (https://www.paris.fr/evenements/raconte-moi-une-histoire-55682);Numéri’kids (https://www.paris.fr/evenements/numeri-kids-55668);Créa'kids ""Fabrique ton kit de détective"" (https://www.paris.fr/evenements/crea-kids-fabrique-ton-kit-de-detective-55664);Samedi des tout-petits (https://www.paris.fr/evenements/samedi-des-tout-petits-55660);Spectacle de conte ""Caillou !!!"" par Sylvie Mombo (https://www.paris.fr/evenements/spectacle-de-conte-caillou-par-sylvie-mombo-55656);Atelier ""Scène de crime"" avec les Petits Débrouillards (https://www.paris.fr/evenements/atelier-scene-de-crime-avec-les-petits-debrouillards-55665);Ciné'mômes (https://www.paris.fr/evenements/cine-momes-55662);Spectacle « L'enlèvement de la bibliothécaire » (https://www.paris.fr/evenements/spectacle-l-enlevement-de-la-bibliothecaire-52082);Jeux et énigmes (https://www.paris.fr/evenements/jeux-et-enigmes-55657)"
 ```
+
+
+1. List $\to$ Row
+    - Split over `;` delimiters using :
+    ``unnest(string_to_array(children, ';'))``
+2. Extract id
+    - The id is always at the end of the url. It can be extracted knowing it's always between the last ``-`` and ``)`` of the string.
