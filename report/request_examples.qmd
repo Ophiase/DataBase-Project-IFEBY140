@@ -1,0 +1,24 @@
+---
+title: Request examples
+---
+\
+See the interactive preview of the data with :
+```sql
+\i XXX_YYY_data.sql
+```
+
+### Number of events with pmr, blind or deaf access :
+```sql
+SELECT COUNT(event_id) 
+FROM event_table
+WHERE (
+    address_name,
+    address_street, 
+    address_zipcode, 
+    address_city
+) IN (
+    SELECT address_name, address_street, address_zipcode, address_city
+    FROM address_table
+    WHERE (pmr=TRUE) OR (deaf=TRUE) OR (blind=TRUE) 
+);
+```

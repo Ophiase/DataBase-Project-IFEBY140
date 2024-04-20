@@ -9,6 +9,7 @@ book:
     - analysis.qmd
     - modelization.qmd
     - implementation.qmd
+    - request_examples.qmd
   downloads: [pdf]
 
 format:

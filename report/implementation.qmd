@@ -15,13 +15,19 @@ Create tables and populate them with :
 \i XXX_YYY_tables.sql
 ```
 
-See the preview of the data with :
-```sql
-\i XXX_YYY_data.sql
-```
-
 ## Code Details
 
 ### Transports
+Raw transport line :
+```
+"Métro -> 1 : Bastille (Paris) (304m)
+Bus -> 29618791 : Lyon / Daumesnil - Ledru Rollin (Paris) (246m)
+Vélib -> Lacuée - Lyon (121.91m)
+<a href=""https://www.geovelo.fr/paris/route?to=2.370458543300628,48.849268481958404"">Calculez votre itinéraire sur GéoVélo</a>"
+```
 
 ### Sub Events
+Raw sub event line example:
+```
+"Rencontre avec Jørn Lier Horst (https://www.paris.fr/evenements/rencontre-avec-jorn-lier-horst-52356);Raconte-moi une histoire (https://www.paris.fr/evenements/raconte-moi-une-histoire-55682);Numéri’kids (https://www.paris.fr/evenements/numeri-kids-55668);Créa'kids ""Fabrique ton kit de détective"" (https://www.paris.fr/evenements/crea-kids-fabrique-ton-kit-de-detective-55664);Samedi des tout-petits (https://www.paris.fr/evenements/samedi-des-tout-petits-55660);Spectacle de conte ""Caillou !!!"" par Sylvie Mombo (https://www.paris.fr/evenements/spectacle-de-conte-caillou-par-sylvie-mombo-55656);Atelier ""Scène de crime"" avec les Petits Débrouillards (https://www.paris.fr/evenements/atelier-scene-de-crime-avec-les-petits-debrouillards-55665);Ciné'mômes (https://www.paris.fr/evenements/cine-momes-55662);Spectacle « L'enlèvement de la bibliothécaire » (https://www.paris.fr/evenements/spectacle-l-enlevement-de-la-bibliothecaire-52082);Jeux et énigmes (https://www.paris.fr/evenements/jeux-et-enigmes-55657)"
+```
