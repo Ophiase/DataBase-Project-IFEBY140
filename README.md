@@ -2,8 +2,12 @@
 
 ## Introduction
 
-University project.
+A database project for a university course. 
 Read [report](XXX_YYY_report.pdf) for more details.
+
+Course constraint :
+> Code everything in psql. \
+> Don't use pgsql functions to extract the data.
 
 ## Execution
 

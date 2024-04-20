@@ -1,9 +1,14 @@
 ---
 title: Introduction
 ---
-
+\
 **[Que Faire à Paris ?](https://www.paris.fr/quefaire)** is a french website that list events happing in Paris. 
 
 The event are archived at this [address](https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/information/?disjunctive.tags&disjunctive.address_name&disjunctive.address_zipcode&disjunctive.address_city&disjunctive.pmr&disjunctive.blind&disjunctive.deaf&disjunctive.price_type&disjunctive.access_type&disjunctive.programs) in multiple formats including csv.
 
-In this project we propose a normalized database to store the event based on the archive format.
+In this project we propose a normalized database to store the events based on the csv archive.
+
+Course constraint :
+
+> Code everything in psql. \
+> Don't use pgsql functions to extract the data.
