@@ -2,9 +2,13 @@
 title: Modelization
 ---
 
+## ER schema
+
 ![](ressources/schema_er_db_2024.excalidraw.png){fig-align="center" width=500}
 
 The following decomposition, satisfies Boyce-codd normal form at the same time :
+
+## Tables
 
 **geographic_correspondance**([address_street, address_zipcode, address_city]{.underline} | lat, lon)
 

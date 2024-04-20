@@ -8,6 +8,7 @@ book:
     - index.qmd
     - analysis.qmd
     - modelization.qmd
+    - implementation.qmd
 
 format:
   html:
