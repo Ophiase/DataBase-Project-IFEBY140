@@ -28,10 +28,6 @@ SET client_min_messages TO WARNING;
 \! echo
 
 -----------------------------------------------------------------
-
--- \set something 128
-
------------------------------------------------------------------
 -- Create tables
 
 \i t_geographic_correspondance.sql
