@@ -180,7 +180,7 @@ INSERT INTO event_table(
     access_link, price_type, updated_at, access_type, 
     programs, access_link_text, address_url, 
     image_couverture, address_text, title_event, 
-    address_url_text, audience
+    address_url_text, audience, group_name
 ) SELECT
     event_id, event_url, title, event_description, 
     date_begin, lead_text, date_end, 
@@ -192,7 +192,7 @@ INSERT INTO event_table(
     access_link, price_type, updated_at, access_type, 
     programs, access_link_text, address_url, 
     image_couverture, address_text, title_event, 
-    address_url_text, audience
+    address_url_text, audience, group_name
 FROM temp_event
 WHERE
     (
