@@ -56,7 +56,8 @@ CREATE TABLE
         address_url_text VARCHAR(:length_description), 
         address_text VARCHAR(:length_description),
         --
-        group_name VARCHAR(:length_description)
+        group_name VARCHAR(:length_description),
+        parent_event_id INT REFERENCES event_table(event_id) ON DELETE CASCADE,
         --
         CONSTRAINT date_coherence 
             CHECK (

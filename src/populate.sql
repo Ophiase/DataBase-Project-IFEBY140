@@ -67,7 +67,7 @@ CREATE TEMPORARY TABLE temp_event (
     title_event VARCHAR(:length_title), 
     audience VARCHAR(:length_description), 
     --
-    childrens TEXT,
+    children TEXT,
     group_name TEXT
     );
 
@@ -85,7 +85,7 @@ CREATE TEMPORARY TABLE temp_event (
 --     access_link, price_type, updated_at, access_type, 
 --     programs, access_link_text, address_url, 
 --     image_couverture, address_text, title_event, 
---     address_url_text, audience, childrens
+--     address_url_text, audience, children
 -- ) FROM 'que-faire-a-paris-.csv' DELIMITER ';' CSV HEADER;
 
 
@@ -236,7 +236,30 @@ ON CONFLICT DO NOTHING;
 -----------------------------------------------------------------
 \! echo POPULATE: sub_event
 
-\! echo "TODO !"
+UPDATE event_table
+SET parent_event_id = (
+    SELECT
+        event_id AS parent_event_id
+    FROM (
+        SELECT 
+            event_id, 
+            unnest(string_to_array(children, ';')) AS child
+        FROM temp_event
+        WHERE
+            children IS NOT NULL AND LENGTH(children) > 2
+    ) AS t
+    WHERE
+    (
+        CAST(
+            substring(
+            child,
+            (length(child) - position('-' IN reverse(child)) + 2),
+            position('-' IN reverse(child)) - 2
+            ) 
+        AS INT) = event_table.event_id
+    )
+    LIMIT 1
+);
 
 -----------------------------------------------------------------
 \! echo POPULATE: transport

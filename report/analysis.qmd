@@ -36,10 +36,10 @@ We will remove the following attributes : description_de_la_date
 Non atomic attributs :
 
 - List
-    - Occurences : separated by '_' (underscore)
-    - Tags : separated by ','
-    - Childrens : separated by ','
-    - Transport : separated by E'\n'
+    - Occurences : separated by ``'_'`` (underscore)
+    - Tags : separated by ``','``
+    - Childrens : separated by ``','``
+    - Transport : separated by ``'\n'``
 - Multiple attributes
     - Transport : transport_type,  transport_line, station, distance
     - Geographic_Coordinates : longitude, latitude
@@ -52,6 +52,18 @@ Non atomic attributs :
     - Removed attribute
 - adresse_du_lieu, ville, code_postale $\to$ coordonnees_geographiques
 - nom_du_lieu, adresse_du_lieu, ville, code_postale -> acces_pmr, acces_mal_voyant, acces_mal_entendant
+
+## Constraints
+- Realistic implementation expectations
+    - date_end > date_start
+    - NOT NULL :
+        - id, url
+        - (date_start AND date_end) OR (ocurrences)
+- Unrealistic implementation expections
+    - url must finish with id
+    - all urls must be valid
+    - address must be valid
+    - phone_number must be valid
 
 ## Misc
 
