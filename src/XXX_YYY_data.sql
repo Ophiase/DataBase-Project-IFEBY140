@@ -1,11 +1,8 @@
-/*
-    TODO:
-        - Number of events with pmr/blind/deaf access
-        - 
-*/
-
 ---------------------
 \i d_header.sql
+\echo [PART 1]
+\echo
+
 \echo Number of events with pmr, blind or deaf access :
 
 SELECT COUNT(event_id) 
@@ -41,6 +38,8 @@ FROM (
 SELECT 1;
 \i d_header.sql
 ---------------------------------------------------------------
+\echo [PART 2]
+\echo
 
 \echo The 10 station with the most events
 
@@ -67,8 +66,29 @@ LIMIT 10;
 SELECT 1;
 \i d_header.sql
 ---------------------------------------------------------------
+\echo [PART 3]
+\echo
 
+\echo The 10 most used tag
+SELECT
+    COUNT(l.event_id) as count, keyword
+FROM
+    event_table AS l INNER JOIN tag AS r
+    ON l.event_id = r.event_id
+GROUP BY (keyword)
+ORDER BY count DESC
+LIMIT 10;
+
+
+\echo The 10 biggest group
+SELECT COUNT(event_id) as count, group_name
+FROM
+    event_table
+GROUP BY (group_name)
+ORDER BY count DESC
+LIMIT 10;
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
+\! clear
 ---------------------------------------------------------------

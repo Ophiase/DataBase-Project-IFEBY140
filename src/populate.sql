@@ -223,7 +223,7 @@ ON CONFLICT DO NOTHING;
 INSERT INTO tag (event_id, keyword)
 SELECT 
     et.event_id, 
-    (string_to_array(keyword, ',')) 
+    unnest(string_to_array(keyword, ',')) 
     AS keyword
 FROM 
     temp_event
