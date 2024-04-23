@@ -137,4 +137,30 @@ LIMIT
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
+
+\! clear
+---------------------------------------------------------------
+\echo [PART 5]
+\echo
+
+\echo 'All mobilities availible'
+
+SELECT transport_type 
+FROM transport
+GROUP BY transport_type;
+
+\prompt 'Enter your mobility : ' input_transport
+
+\echo Most recents event accessible with :input_transport
+
+SELECT date_begin, title
+FROM transport NATURAL JOIN event_table
+WHERE transport_type = :'input_transport'
+GROUP BY (event_id, date_begin, title)
+ORDER BY date_begin DESC
+LIMIT 10;
+
+\prompt 'Press Enter to continue...' ''
+SELECT 1;
+
 \! clear

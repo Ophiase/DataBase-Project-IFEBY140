@@ -4,7 +4,9 @@ INSERT INTO transport (
      station, distance
      )
 SELECT 
-    event_id, transport_type, transport_line, 
+    event_id, 
+    substring(transport_type, 1, LENGTH(transport_type)-1) AS transport_type, 
+    transport_line, 
     (
         CASE
         WHEN position(')' IN reverse(station)) > 0 THEN
