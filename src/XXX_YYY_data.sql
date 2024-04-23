@@ -82,6 +82,32 @@ GROUP BY (keyword)
 ORDER BY count DESC
 LIMIT 10;
 
+\prompt 'Enter a tag : ' input_tag
+
+\echo The most recent events using the tag :input_tag :
+
+SELECT
+    l.date_begin,
+    l.title
+FROM
+    event_table AS l
+    INNER JOIN
+    tag AS r ON l.event_id = r.event_id
+WHERE
+    r.keyword = :'input_tag'
+    AND date_begin IS NOT NULL
+ORDER BY
+    l.date_begin DESC
+LIMIT
+    10;    
+
+\prompt 'Press Enter to continue...' ''
+SELECT 1;
+
+\! clear
+---------------------------------------------------------------
+\echo [PART 4]
+\echo
 
 \echo The 10 biggest group
 SELECT COUNT(event_id) as count, group_name
@@ -91,7 +117,24 @@ GROUP BY (group_name)
 ORDER BY count DESC
 LIMIT 10;
 
+\prompt 'Enter a group : ' input_group
+
+\echo The most recent events in the group :input_group :
+
+SELECT
+    date_begin,
+    title
+FROM
+    event_table
+WHERE
+    group_name = :'input_group'
+    AND date_begin IS NOT NULL
+ORDER BY
+    date_begin DESC
+LIMIT
+    10;    
+
+
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
 \! clear
----------------------------------------------------------------

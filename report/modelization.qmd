@@ -6,7 +6,7 @@ title: Modelization
 
 ![](ressources/schema_er_db_2024.excalidraw.png){fig-align="center" width=500}
 
-The following decomposition, satisfies Boyce-codd normal form at the same time :
+The following decomposition, satisfies Boyce-codd normal form.
 
 ## Tables
 
