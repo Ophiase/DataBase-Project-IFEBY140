@@ -1,6 +1,7 @@
-/.quarto/
-/_output
+.quarto/
+_output
 *.html
 *.tex
 *_files
 src
+/.quarto/

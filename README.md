@@ -13,9 +13,10 @@ Course constraint :
 
 ### Report
 ```bash
-make render # update XXX_YYY_report.pdf
-make render_show # update XXX_YYY_report.pdf and open it
-make web_preview # start web server and open web report
+make update_pdf # update XXX_YYY_report.pdf and open it
+make update_web # update docs/
+
+make preview_web # start web server and open web report
 ```
 
 ### PSQL

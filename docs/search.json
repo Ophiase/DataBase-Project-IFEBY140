@@ -1,0 +1,132 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Report - DataBase Project - IFEBY140",
+    "section": "",
+    "text": "Que Faire à Paris ? is a french website that list events happing in Paris.\nThe event are archived at this address in multiple formats including csv.\nIn this project we propose a normalized database to store the events based on the csv archive.\nCourse constraint :\n\nCode everything in psql.\nDon’t use pgsql functions to extract the data.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "2  Analyzis",
+    "section": "",
+    "text": "2.1 Redudant Attributes\nWe will remove the following attributes : description_de_la_date",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#first-normal-form",
+    "href": "analysis.html#first-normal-form",
+    "title": "2  Analyzis",
+    "section": "2.2 First Normal Form",
+    "text": "2.2 First Normal Form\nNon atomic attributs :\n\nList\n\nOccurences : separated by '_' (underscore)\nTags : separated by ','\nChildrens : separated by ','\nTransport : separated by '\\n'\n\nMultiple attributes\n\nTransport : transport_type, transport_line, station, distance\nGeographic_Coordinates : longitude, latitude",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#functional-dependencies",
+    "href": "analysis.html#functional-dependencies",
+    "title": "2  Analyzis",
+    "section": "2.3 Functional dependencies :",
+    "text": "2.3 Functional dependencies :\n\nid \\(\\to\\) url\n\nFor simplicty sake, we consider that we cannot deduce id from url. Perhaps, we will use this property to identify sub_events_id in “childrens”\n\nid \\(\\to\\) titre, chapeau, description, date_de_debut, date_de_fin, occurences, url_de_l_image, texte_alternatif_de_l_image, credit_de_l_image, mots_clefs, nom_du_lieu, adresse_du_lieu, code_postale, ville, url_du_contact, telephone_de_contact, email_de_contact, url_facebook_associee, url_twitter_associe, type_de_prix, detail_du_prix, type_d_acces, url_de_reservation, url_de_reservation_texte, date_de_mise_a_jour, image_de_couverture, programmes, en_ligne_address_url, en_ligne_address_url_text, en_ligne_address_text, title_event, audience, childrens, groupe, transport_type, transport_line, station, distance\ndate_de_debut, date_de_fin \\(\\to\\) description_de_la_date\n\nRemoved attribute\n\nadresse_du_lieu, ville, code_postale \\(\\to\\) coordonnees_geographiques\nnom_du_lieu, adresse_du_lieu, ville, code_postale -&gt; acces_pmr, acces_mal_voyant, acces_mal_entendant\n\n\n2.3.1 Non used functional dependencies\n\nIn 1NF : transport_station \\(\\to\\) ville\n\nIt’s true, but for simplicity sake, we’ll ignore it.\n\nville \\(\\to\\) cp\n\nIt’s neither true in France and Ile de France\n\n(titre, date_de_debut, date_de_fin, nom_du_lieu, adresse_du_lieu, code_postale, ville) \\(\\to\\) id\n\nWe cannot use those attributes as a primary key, because they are often NULL, thus we’ll ignore this functionnal dependency.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#constraints",
+    "href": "analysis.html#constraints",
+    "title": "2  Analyzis",
+    "section": "2.4 Constraints",
+    "text": "2.4 Constraints\n\nRealistic implementation expectations\n\ndate_end &gt; date_start\nNOT NULL :\n\nid, url\n(date_start AND date_end) OR (ocurrences)\n\n\nUnrealistic implementation expections\n\nurl must finish with id\nall urls must be valid\naddress must be valid\nphone_number must be valid",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#misc",
+    "href": "analysis.html#misc",
+    "title": "2  Analyzis",
+    "section": "2.5 Misc",
+    "text": "2.5 Misc\nWe decide to translate everything to english.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "modelization.html",
+    "href": "modelization.html",
+    "title": "3  Modelization",
+    "section": "",
+    "text": "3.1 ER schema\nThe following decomposition, satisfies Boyce-codd normal form.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Modelization</span>"
+    ]
+  },
+  {
+    "objectID": "modelization.html#tables",
+    "href": "modelization.html#tables",
+    "title": "3  Modelization",
+    "section": "3.2 Tables",
+    "text": "3.2 Tables\ngeographic_correspondance(address_street, address_zipcode, address_city | lat, lon)\naddress_table(address_name, address_street, address_zipcode, address_city | pmr, blind, deaf)\nevent_table (event_id | event_url, title, lead_text, event_description, date_start, date_end, cover_url, cover_alt, cover_credit, address_name, address_street, address_zipcode, address_city, price_type, price_detail, access_type, access_link, access_link_text, updated_at, image_couverture, programs, title_event, audience, contact_url, contact_phone, contact_mail, contact_facebook, contact_twitter, address_url, address_url_text, address_text, keyword, group_name, parent_event_id)\noccurence(event_id, occurence_date)\ntag(event_id | keyword)\ntransport(event_id, transport_type, transport_line, station | distance)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Modelization</span>"
+    ]
+  },
+  {
+    "objectID": "implementation.html",
+    "href": "implementation.html",
+    "title": "4  Implementation",
+    "section": "",
+    "text": "4.1 Execution\nStart psql in src folder.\nCreate tables and populate them with :",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "implementation.html#execution",
+    "href": "implementation.html#execution",
+    "title": "4  Implementation",
+    "section": "",
+    "text": "cd src\npsql -d &lt;database&gt; username\n\n\\i XXX_YYY_tables.sql",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "implementation.html#code-details",
+    "href": "implementation.html#code-details",
+    "title": "4  Implementation",
+    "section": "4.2 Code Details",
+    "text": "4.2 Code Details\nWe ignore most redudancy errors using ON CONFLICT DO NOTHING.\n\n4.2.1 Populate Transports\nRaw transport line :\n\"Métro -&gt; 1 : Bastille (Paris) (304m)\nBus -&gt; 29618791 : Lyon / Daumesnil - Ledru Rollin (Paris) (246m)\nVélib -&gt; Lacuée - Lyon (121.91m)\n&lt;a href=\"\"https://www.geovelo.fr/paris/route?to=2.370458543300628,48.849268481958404\"\"&gt;Calculez votre itinéraire sur GéoVélo&lt;/a&gt;\"\n\nList \\(\\to\\) Row\n\nSplit over line jump using : unnest(string_to_array(transport, E'\\n')) AS transport\n\nRemove unnecessary HTML content\n\nWHERE transport NOT LIKE '&lt;%'\n\nExtract (transport_type, transport_line, station + distance)\n\nuse split_part over -&gt; and :\n\nVélib case\n\nIf station is empty, it means it is a Vélib, and the station was wrongly splited into transport_line. Then we swawp station and transport_line\n\nExtract distance\n\nIt can be done using a combination of substring, reverse and length functions.\nDistance information is always between the last occurence of ( and m).\n\n\n\n\n4.2.2 Populate Sub-Events\nRaw sub event line example:\n\"Rencontre avec Jørn Lier Horst (https://www.paris.fr/evenements/rencontre-avec-jorn-lier-horst-52356);Raconte-moi une histoire (https://www.paris.fr/evenements/raconte-moi-une-histoire-55682);Numéri’kids (https://www.paris.fr/evenements/numeri-kids-55668);Créa'kids \"\"Fabrique ton kit de détective\"\" (https://www.paris.fr/evenements/crea-kids-fabrique-ton-kit-de-detective-55664);Samedi des tout-petits (https://www.paris.fr/evenements/samedi-des-tout-petits-55660);Spectacle de conte \"\"Caillou !!!\"\" par Sylvie Mombo (https://www.paris.fr/evenements/spectacle-de-conte-caillou-par-sylvie-mombo-55656);Atelier \"\"Scène de crime\"\" avec les Petits Débrouillards (https://www.paris.fr/evenements/atelier-scene-de-crime-avec-les-petits-debrouillards-55665);Ciné'mômes (https://www.paris.fr/evenements/cine-momes-55662);Spectacle « L'enlèvement de la bibliothécaire » (https://www.paris.fr/evenements/spectacle-l-enlevement-de-la-bibliothecaire-52082);Jeux et énigmes (https://www.paris.fr/evenements/jeux-et-enigmes-55657)\"\n\nList \\(\\to\\) Row\n\nSplit over ; delimiters using : unnest(string_to_array(children, ';'))\n\nExtract id\n\nThe id is always at the end of the url. It can be extracted knowing it’s always between the last - and ) of the string.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Implementation</span>"
+    ]
+  },
+  {
+    "objectID": "request_examples.html",
+    "href": "request_examples.html",
+    "title": "5  Request examples",
+    "section": "",
+    "text": "5.1 Outputs",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Request examples</span>"
+    ]
+  },
+  {
+    "objectID": "request_examples.html#outputs",
+    "href": "request_examples.html#outputs",
+    "title": "5  Request examples",
+    "section": "",
+    "text": "5.1.1 Statistics\nNumber of events : 2816\nNumber of events with pmr, blind or deaf access : 432\nNumber of events accessibles with “Vélib” : 264\nNumber of events with multiple transports : 266\n\n\n5.1.2 The 10 station with the most events\n\n\n\n\n\n\n\n\n\ncount\ntransport_type\ntransport_line\nstation\n\n\n\n\n75\nBus\n29618791\nLyon / Daumesnil - Ledru Rollin (Paris)\n\n\n75\nMétro\n1\nBastille (Paris)\n\n\n75\nVélib\n\nLacuée - Lyon\n\n\n55\nVélib\n\nBoyer - Ménilmontant\n\n\n30\nBus\n2696\nPyrénées - Ménilmontant (Paris)\n\n\n30\nMétro\n11\nJourdain (Paris)\n\n\n29\nBus\n397089\nVolontaires - Lecourbe (Paris)\n\n\n29\nVélib\n\nVolontaire - Lecourbe\n\n\n29\nMétro\n12\nVolontaires (Paris)\n\n\n25\nMétro\n3\nGambetta (Paris)\n\n\n\n\n\n5.1.3 The title of the 10 events with the most occurrences\n\n\n\n\n\n\n\n\ncount\nid\ntitle\n\n\n\n\n9970\n41529\nUn parcours sonore et urbain\n\n\n4031\n37301\nLa Cité de l’Histoire, l’expérience immersive à travers l’Histoire de France\n\n\n641\n31363\nUne plongée immersive avec les baleines à l’Aquarium tropical\n\n\n634\n11871\nRevivre, les animaux disparus en réalité augmentée\n\n\n572\n42634\n« Notre-Dame de Paris : au cœur du chantier »\n\n\n552\n53785\nMontmartre Enchanté insolite : la visite chantée et commentée\n\n\n511\n32056\nMémorial de l’ancienne gare de déportation de Bobigny\n\n\n379\n32135\nExposition ” Notre-Dame de Paris. Des bâtisseurs aux restaurateurs.”\n\n\n352\n50933\nSauvez le cinéma, l’escape game du Grand Rex\n\n\n342\n31054\n« Félins » au Muséum national d’Histoire naturelle\n\n\n\n\n\n5.1.4 The 10 most used tag\n\n\n\ncount\nkeyword\n\n\n\n\n641\nMusique\n\n\n623\nConcert\n\n\n503\nAtelier\n\n\n454\nEnfants\n\n\n393\nLoisirs\n\n\n312\nSport\n\n\n265\nExpo\n\n\n240\nConférence\n\n\n234\nThéâtre\n\n\n179\nLittérature\n\n\n\n\n\n5.1.5 The 10 biggest group\n\n\n\ncount\ngroup_name\n\n\n\n\n1184\nAucun\n\n\n634\nBibliothèques\n\n\n602\nAgenda\n\n\n214\nActivités DJS\n\n\n74\nCentres d’animations\n\n\n49\nParcs et jardins\n\n\n23\nNuit Blanche\n\n\n22\nAssociations\n\n\n14\nMusées",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Request examples</span>"
+    ]
+  }
+]
