@@ -2,8 +2,8 @@
 
 ## Introduction
 
-A database project for a university course. 
-Read [report](XXX_YYY_report.pdf) for more details.
+A database project for a university course.
+For more details : [pdf report](XXX_YYY_report.pdf), [web report](https://ophiase.github.io/DataBase-Project-IFEBY140/)
 
 Course constraint :
 > Code everything in psql. \
