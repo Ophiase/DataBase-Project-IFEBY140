@@ -18,6 +18,6 @@ The following decomposition, satisfies Boyce-codd normal form.
 
 **occurence**([event_id, occurence_date]{.underline})
 
-**tag**([event_id]{.underline} | keyword)
+**tag**([event_id, keyword]{.underline})
 
 **transport**([event_id, transport_type, transport_line, station]{.underline} | distance)

@@ -185,7 +185,10 @@ window.Quarto = {
   <li><a href="#non-used-functional-dependencies" id="toc-non-used-functional-dependencies" class="nav-link" data-scroll-target="#non-used-functional-dependencies"><span class="header-section-number">2.3.1</span> Non used functional dependencies</a></li>
   </ul></li>
   <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints"><span class="header-section-number">2.4</span> Constraints</a></li>
-  <li><a href="#misc" id="toc-misc" class="nav-link" data-scroll-target="#misc"><span class="header-section-number">2.5</span> Misc</a></li>
+  <li><a href="#functional-dependencies-after-decomposition" id="toc-functional-dependencies-after-decomposition" class="nav-link" data-scroll-target="#functional-dependencies-after-decomposition"><span class="header-section-number">2.5</span> Functional dependencies after decomposition</a>
+  <ul class="collapse">
+  <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.5.1</span> Boyce-Codd verification</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +215,7 @@ window.Quarto = {
 
 
 <p>Initial Columns :</p>
-<div id="fea8e4be" class="cell" data-execution_count="3">
+<div id="69167cb4" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>['ID' 'URL' 'Titre' 'Chapeau' 'Description' 'Date de début' 'Date de fin'
  'Occurrences' 'Description de la date' "URL de l'image"
@@ -278,9 +281,10 @@ window.Quarto = {
 </ul></li>
 <li>(titre, date_de_debut, date_de_fin, nom_du_lieu, adresse_du_lieu, code_postale, ville) <span class="math inline">\(\to\)</span> id
 <ul>
-<li>We cannot use those attributes as a primary key, because they are often <code>NULL</code>, thus we’ll ignore this functionnal dependency.</li>
+<li>We cannot use those attributes as a primary key, because they are often <code>NULL</code>, thus we’ll ignore this functionnal dependency. ## Misc</li>
 </ul></li>
 </ul>
+<p>We decide to translate everything to english.</p>
 </section>
 </section>
 <section id="constraints" class="level2" data-number="2.4">
@@ -304,11 +308,57 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="misc" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="misc"><span class="header-section-number">2.5</span> Misc</h2>
-<p>We decide to translate everything to english.</p>
+<section id="functional-dependencies-after-decomposition" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="functional-dependencies-after-decomposition"><span class="header-section-number">2.5</span> Functional dependencies after decomposition</h2>
+<ul>
+<li>Relation : <strong>geographic_correspondance</strong>
+<ul>
+<li><u>address_street, address_zipcode, address_city</u> <span class="math inline">\(\to\)</span> lat, lon</li>
+</ul></li>
+<li>Relation : <strong>address_table</strong>
+<ul>
+<li><u>address_name, address_street, address_zipcode, address_city</u> <span class="math inline">\(\to\)</span> pmr, blind, deaf</li>
+</ul></li>
+<li>Relation : <strong>event_table</strong>
+<ul>
+<li><u>event_id</u> <span class="math inline">\(\to\)</span> event_url, title, lead_text, event_description, date_start, date_end, cover_url, cover_alt, cover_credit, address_name, address_street, address_zipcode, address_city, price_type, price_detail, access_type, access_link, access_link_text, updated_at, image_couverture, programs, title_event, audience, contact_url, contact_phone, contact_mail, contact_facebook, contact_twitter, address_url, address_url_text, address_text, keyword, group_name, parent_event_id</li>
+</ul></li>
+<li>Relation : <strong>occurence</strong>
+<ul>
+<li><u>event_id, occurence_date</u> (no functional dependancy)</li>
+</ul></li>
+<li>Relation : <strong>tag</strong>
+<ul>
+<li><u>event_id, keyword</u> (no functional dependancy)</li>
+</ul></li>
+<li>Relation : <strong>transport</strong>
+<ul>
+<li><u>event_id, transport_type, transport_line, station</u> <span class="math inline">\(\to\)</span> distance</li>
+</ul></li>
+</ul>
+<section id="boyce-codd-verification" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="boyce-codd-verification"><span class="header-section-number">2.5.1</span> Boyce-Codd verification</h3>
+<ul>
+<li>1NF : Atomicity and no list attributs
+<ul>
+<li>Checked</li>
+</ul></li>
+<li>2NF : Attributes cannot depend only on a subpart of the primary key
+<ul>
+<li>Checked</li>
+</ul></li>
+<li>3NF : No transitive dependances
+<ul>
+<li>Checked</li>
+</ul></li>
+<li>Boyce-Codd : <span class="math inline">\(X \to Y\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(X\)</span> is a superkey keyword
+<ul>
+<li>Checked</li>
+</ul></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
