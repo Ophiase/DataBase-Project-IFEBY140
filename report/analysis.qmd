@@ -60,9 +60,10 @@ Non atomic attributs :
     - It's neither true in France and ``Ile de France``
 - (titre, date_de_debut, date_de_fin, nom_du_lieu, adresse_du_lieu, code_postale, ville) $\to$ id
     - We cannot use those attributes as a primary key, because they are often `NULL`, thus we'll ignore this functionnal dependency. 
-## Misc
 
-We decide to translate everything to english.
+## Miscellaneous
+
+We decide to translate everything into English.
 
 ## Constraints
 - Realistic implementation expectations

@@ -184,10 +184,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#non-used-functional-dependencies" id="toc-non-used-functional-dependencies" class="nav-link" data-scroll-target="#non-used-functional-dependencies"><span class="header-section-number">2.3.1</span> Non used functional dependencies</a></li>
   </ul></li>
-  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints"><span class="header-section-number">2.4</span> Constraints</a></li>
-  <li><a href="#functional-dependencies-after-decomposition" id="toc-functional-dependencies-after-decomposition" class="nav-link" data-scroll-target="#functional-dependencies-after-decomposition"><span class="header-section-number">2.5</span> Functional dependencies after decomposition</a>
+  <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous"><span class="header-section-number">2.4</span> Miscellaneous</a></li>
+  <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints"><span class="header-section-number">2.5</span> Constraints</a></li>
+  <li><a href="#functional-dependencies-after-decomposition" id="toc-functional-dependencies-after-decomposition" class="nav-link" data-scroll-target="#functional-dependencies-after-decomposition"><span class="header-section-number">2.6</span> Functional dependencies after decomposition</a>
   <ul class="collapse">
-  <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.5.1</span> Boyce-Codd verification</a></li>
+  <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.6.1</span> Boyce-Codd verification</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -215,7 +216,7 @@ window.Quarto = {
 
 
 <p>Initial Columns :</p>
-<div id="69167cb4" class="cell" data-execution_count="3">
+<div id="040d40e8" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>['ID' 'URL' 'Titre' 'Chapeau' 'Description' 'Date de début' 'Date de fin'
  'Occurrences' 'Description de la date' "URL de l'image"
@@ -281,14 +282,17 @@ window.Quarto = {
 </ul></li>
 <li>(titre, date_de_debut, date_de_fin, nom_du_lieu, adresse_du_lieu, code_postale, ville) <span class="math inline">\(\to\)</span> id
 <ul>
-<li>We cannot use those attributes as a primary key, because they are often <code>NULL</code>, thus we’ll ignore this functionnal dependency. ## Misc</li>
+<li>We cannot use those attributes as a primary key, because they are often <code>NULL</code>, thus we’ll ignore this functionnal dependency.</li>
 </ul></li>
 </ul>
-<p>We decide to translate everything to english.</p>
 </section>
 </section>
-<section id="constraints" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="constraints"><span class="header-section-number">2.4</span> Constraints</h2>
+<section id="miscellaneous" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="miscellaneous"><span class="header-section-number">2.4</span> Miscellaneous</h2>
+<p>We decide to translate everything into English.</p>
+</section>
+<section id="constraints" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="constraints"><span class="header-section-number">2.5</span> Constraints</h2>
 <ul>
 <li>Realistic implementation expectations
 <ul>
@@ -308,8 +312,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="functional-dependencies-after-decomposition" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="functional-dependencies-after-decomposition"><span class="header-section-number">2.5</span> Functional dependencies after decomposition</h2>
+<section id="functional-dependencies-after-decomposition" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="functional-dependencies-after-decomposition"><span class="header-section-number">2.6</span> Functional dependencies after decomposition</h2>
 <ul>
 <li>Relation : <strong>geographic_correspondance</strong>
 <ul>
@@ -336,8 +340,8 @@ window.Quarto = {
 <li><u>event_id, transport_type, transport_line, station</u> <span class="math inline">\(\to\)</span> distance</li>
 </ul></li>
 </ul>
-<section id="boyce-codd-verification" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1" class="anchored" data-anchor-id="boyce-codd-verification"><span class="header-section-number">2.5.1</span> Boyce-Codd verification</h3>
+<section id="boyce-codd-verification" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="boyce-codd-verification"><span class="header-section-number">2.6.1</span> Boyce-Codd verification</h3>
 <ul>
 <li>1NF : Atomicity and no list attributs
 <ul>
