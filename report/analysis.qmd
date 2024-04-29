@@ -108,6 +108,7 @@ We decide to translate everything into English.
 ## Indexes
 
 We often want to identify events using :
+
 - the title
     - event_table (title)
     - event_table (title_event)   
@@ -120,5 +121,6 @@ We often want to identify events using :
     - event_table (event_url)
 - event_table (parent_event_id)
 
-We also want to do agregations on keyword
-    - tag (keyword)
+We also want to do agregations on keyword :
+
+- tag (keyword)

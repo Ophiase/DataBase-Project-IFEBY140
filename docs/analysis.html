@@ -190,6 +190,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.6.1</span> Boyce-Codd verification</a></li>
   </ul></li>
+  <li><a href="#indexes" id="toc-indexes" class="nav-link" data-scroll-target="#indexes"><span class="header-section-number">2.7</span> Indexes</a></li>
   </ul>
 </nav>
     </div>
@@ -216,7 +217,7 @@ window.Quarto = {
 
 
 <p>Initial Columns :</p>
-<div id="040d40e8" class="cell" data-execution_count="3">
+<div id="5f2999fa" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>['ID' 'URL' 'Titre' 'Chapeau' 'Description' 'Date de début' 'Date de fin'
  'Occurrences' 'Description de la date' "URL de l'image"
@@ -276,7 +277,7 @@ window.Quarto = {
 <ul>
 <li>It’s true, but for simplicity sake, we’ll ignore it.</li>
 </ul></li>
-<li>ville <span class="math inline">\(\to\)</span> cp
+<li>ville <span class="math inline">\(\to\)</span> cp and cp <span class="math inline">\(\to\)</span> ville
 <ul>
 <li>It’s neither true in France and <code>Ile de France</code></li>
 </ul></li>
@@ -360,9 +361,39 @@ window.Quarto = {
 <li>Checked</li>
 </ul></li>
 </ul>
-
-
 </section>
+</section>
+<section id="indexes" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="indexes"><span class="header-section-number">2.7</span> Indexes</h2>
+<p>We often want to identify events using :</p>
+<ul>
+<li>the title
+<ul>
+<li>event_table (title)</li>
+<li>event_table (title_event)<br>
+</li>
+</ul></li>
+<li>the period
+<ul>
+<li>event_table (date_begin)</li>
+<li>event_table (date_end)</li>
+</ul></li>
+<li>the arrondissement of Paris
+<ul>
+<li>event_table (address_zipcode)</li>
+</ul></li>
+<li>using the url
+<ul>
+<li>event_table (event_url)</li>
+</ul></li>
+<li>event_table (parent_event_id)</li>
+</ul>
+<p>We also want to do agregations on keyword :</p>
+<ul>
+<li>tag (keyword)</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
