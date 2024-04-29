@@ -21,3 +21,5 @@ CREATE TABLE
         FOREIGN KEY (event_id)
             REFERENCES event_table(event_id)
     );
+
+CREATE INDEX ON tag (keyword);

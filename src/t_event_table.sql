@@ -68,3 +68,11 @@ CREATE TABLE
         FOREIGN KEY (address_name, address_street, address_zipcode, address_city)
         REFERENCES address_table(address_name, address_street, address_zipcode, address_city)
     );
+
+CREATE INDEX ON event_table (title);
+CREATE INDEX ON event_table (title_event);  
+CREATE INDEX ON event_table (date_begin);
+CREATE INDEX ON event_table (date_end);
+CREATE INDEX ON event_table (address_zipcode);
+CREATE UNIQUE INDEX ON event_table (event_url);
+CREATE INDEX ON event_table (parent_event_id);

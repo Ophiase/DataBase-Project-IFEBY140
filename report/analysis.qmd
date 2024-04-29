@@ -56,7 +56,7 @@ Non atomic attributs :
 ### Non used functional dependencies
 - In 1NF : transport_station $\to$ ville
     - It's true, but for simplicity sake, we'll ignore it.
-- ville $\to$ cp
+- ville $\to$ cp and cp $\to$ ville
     - It's neither true in France and ``Ile de France``
 - (titre, date_de_debut, date_de_fin, nom_du_lieu, adresse_du_lieu, code_postale, ville) $\to$ id
     - We cannot use those attributes as a primary key, because they are often `NULL`, thus we'll ignore this functionnal dependency. 
@@ -104,3 +104,21 @@ We decide to translate everything into English.
     - Checked
 - Boyce-Codd : $X \to Y$ $\implies$ $X$ is a superkey keyword
     - Checked
+
+## Indexes
+
+We often want to identify events using :
+- the title
+    - event_table (title)
+    - event_table (title_event)   
+- the period
+    - event_table (date_begin)
+    - event_table (date_end)
+- the arrondissement of Paris
+    - event_table (address_zipcode)
+- using the url
+    - event_table (event_url)
+- event_table (parent_event_id)
+
+We also want to do agregations on keyword
+    - tag (keyword)
