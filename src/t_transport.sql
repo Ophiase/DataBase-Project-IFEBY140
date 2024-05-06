@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS transport CASCADE;
 
 CREATE TABLE
     transport (
-        event_id INT,
+        event_id INT ON DELETE CASCADE,
         transport_type VARCHAR(:transport_description_length),
         transport_line VARCHAR(:transport_description_length),
         -- Velibs doesn't have line

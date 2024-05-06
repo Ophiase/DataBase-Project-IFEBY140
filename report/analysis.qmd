@@ -71,11 +71,19 @@ We decide to translate everything into English.
     - NOT NULL :
         - id, url
         - (date_start AND date_end) OR (ocurrences)
+        - title
 - Unrealistic implementation expections
     - url must finish with id
     - all urls must be valid
     - address must be valid
     - phone_number must be valid
+    - every event should have an address, a geographic coordinate and a contact
+    - NOT NULL
+        - a non null lead text, description, date_start, date_end, title_event, price_type
+        
+## Triggers
+- event_table.parent_event_id : ON DELETE CASCADE
+- transport.event_id : ON DELETE CASCADE 
 
 ## Functional dependencies after decomposition
 
@@ -121,6 +129,6 @@ We often want to identify events using :
     - event_table (event_url)
 - event_table (parent_event_id)
 
-We also want to do agregations on keyword :
+We also want to do agregations on keywords :
 
 - tag (keyword)
