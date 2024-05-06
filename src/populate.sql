@@ -265,6 +265,3 @@ SET parent_event_id = (
 \! echo POPULATE: transport
 
 \i p_transport.sql
-
------------------------------------------------------------------
-\i XXX_YYY_anomalies.sql
