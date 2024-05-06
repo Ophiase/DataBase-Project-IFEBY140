@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS transport CASCADE;
 
 CREATE TABLE
     transport (
-        event_id INT ON DELETE CASCADE,
+        event_id INT,
         transport_type VARCHAR(:transport_description_length),
         transport_line VARCHAR(:transport_description_length),
         -- Velibs doesn't have line
@@ -24,4 +24,5 @@ CREATE TABLE
         PRIMARY KEY (event_id, transport_type, transport_line, station),
         FOREIGN KEY (event_id)
             REFERENCES event_table(event_id)
+            ON DELETE CASCADE
     );
