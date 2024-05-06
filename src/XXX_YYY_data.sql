@@ -39,8 +39,8 @@ FROM (
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
-\i d_header.sql
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 2]
 \echo
 
@@ -67,8 +67,8 @@ LIMIT 10;
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
-\i d_header.sql
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 3]
 \echo
 
@@ -106,6 +106,7 @@ SELECT 1;
 
 \! clear
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 4]
 \echo
 
@@ -140,6 +141,7 @@ SELECT 1;
 
 \! clear
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 5]
 \echo
 
@@ -158,6 +160,64 @@ FROM transport NATURAL JOIN event_table
 WHERE transport_type = :'input_transport'
 GROUP BY (event_id, date_begin, title)
 ORDER BY date_begin DESC
+LIMIT 10;
+
+\prompt 'Press Enter to continue...' ''
+SELECT 1;
+
+\! clear
+---------------------------------------------------------------
+CREATE OR REPLACE FUNCTION haversine_distance(
+    lat1 double precision, lon1 double precision,
+    lat2 double precision, lon2 double precision)
+RETURNS double precision AS $$
+DECLARE
+    d_lat double precision;
+    d_lon double precision;
+    a double precision;
+    c double precision;
+    d double precision;
+    R double precision := 6371; 
+BEGIN
+    d_lat := radians(lat2 - lat1);
+    d_lon := radians(lon2 - lon1);
+    
+    a := sin(d_lat / 2) * sin(d_lat / 2) +
+         cos(radians(lat1)) * cos(radians(lat2)) *
+         sin(d_lon / 2) * sin(d_lon / 2);
+    
+    c := 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    d := R * c;
+    
+    RETURN d;
+END;
+$$ LANGUAGE plpgsql;
+
+\! clear
+\i d_header.sql
+\echo [PART 6]
+\echo
+
+
+\echo 'Find the nearest activities at a given coordinate.'
+\echo 'For instance, Effeil Tower is at 48.85831, 2.29446'
+\echo
+\prompt 'Enter your latitude : ' user_lat
+\prompt 'Enter your longitude : ' user_lon
+
+\echo 'Nearest activities :'
+\echo
+
+SELECT 
+    substring(title, 0, 40) as title, 
+    address_name, et.address_street,
+    (haversine_distance(:user_lat, :user_lon, gc.lat, gc.lon)) AS "distance (km)"
+FROM event_table AS et
+JOIN geographic_correspondance AS gc ON et.address_street = gc.address_street
+                                       AND et.address_zipcode = gc.address_zipcode
+                                       AND et.address_city = gc.address_city
+ORDER BY "distance (km)"
 LIMIT 10;
 
 \prompt 'Press Enter to continue...' ''
