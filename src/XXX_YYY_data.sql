@@ -39,8 +39,8 @@ FROM (
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
-\i d_header.sql
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 2]
 \echo
 
@@ -67,8 +67,8 @@ LIMIT 10;
 
 \prompt 'Press Enter to continue...' ''
 SELECT 1;
-\i d_header.sql
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 3]
 \echo
 
@@ -106,6 +106,7 @@ SELECT 1;
 
 \! clear
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 4]
 \echo
 
@@ -140,6 +141,7 @@ SELECT 1;
 
 \! clear
 ---------------------------------------------------------------
+\i d_header.sql
 \echo [PART 5]
 \echo
 
@@ -192,22 +194,30 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-\echo [PART 5]
+\! clear
+\i d_header.sql
+\echo [PART 6]
 \echo
 
-\prompt 'Enter your  : lat' user_lat
-\prompt 'Enter your  : lon' user_lon
 
-\echo Nearest activity with user_lat, user_lon
+\echo 'Find the nearest activities at a given coordinate.'
+\echo 'For instance, Effeil Tower is at 48.85831, 2.29446'
+\echo
+\prompt 'Enter your latitude : ' user_lat
+\prompt 'Enter your longitude : ' user_lon
 
-SELECT event_id, title, date_begin, date_end, address_name, et.address_street, et.address_zipcode, et.address_city, lat, lon,
-       haversine_distance(user_lat, user_lon, gc.lat, gc.lon) AS distance
+\echo 'Nearest activities :'
+\echo
+
+SELECT 
+    substring(title, 0, 40) as title, 
+    address_name, et.address_street,
+    (haversine_distance(:user_lat, :user_lon, gc.lat, gc.lon)) AS "distance (km)"
 FROM event_table AS et
 JOIN geographic_correspondance AS gc ON et.address_street = gc.address_street
                                        AND et.address_zipcode = gc.address_zipcode
                                        AND et.address_city = gc.address_city
-ORDER BY distance
+ORDER BY "distance (km)"
 LIMIT 10;
 
 \prompt 'Press Enter to continue...' ''
