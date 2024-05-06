@@ -164,3 +164,53 @@ LIMIT 10;
 SELECT 1;
 
 \! clear
+---------------------------------------------------------------
+CREATE OR REPLACE FUNCTION haversine_distance(
+    lat1 double precision, lon1 double precision,
+    lat2 double precision, lon2 double precision)
+RETURNS double precision AS $$
+DECLARE
+    d_lat double precision;
+    d_lon double precision;
+    a double precision;
+    c double precision;
+    d double precision;
+    R double precision := 6371; 
+BEGIN
+    d_lat := radians(lat2 - lat1);
+    d_lon := radians(lon2 - lon1);
+    
+    a := sin(d_lat / 2) * sin(d_lat / 2) +
+         cos(radians(lat1)) * cos(radians(lat2)) *
+         sin(d_lon / 2) * sin(d_lon / 2);
+    
+    c := 2 * atan2(sqrt(a), sqrt(1 - a));
+    
+    d := R * c;
+    
+    RETURN d;
+END;
+$$ LANGUAGE plpgsql;
+
+
+\echo [PART 5]
+\echo
+
+\prompt 'Enter your  : lat' user_lat
+\prompt 'Enter your  : lon' user_lon
+
+\echo Nearest activity with user_lat, user_lon
+
+SELECT event_id, title, date_begin, date_end, address_name, et.address_street, et.address_zipcode, et.address_city, lat, lon,
+       haversine_distance(user_lat, user_lon, gc.lat, gc.lon) AS distance
+FROM event_table AS et
+JOIN geographic_correspondance AS gc ON et.address_street = gc.address_street
+                                       AND et.address_zipcode = gc.address_zipcode
+                                       AND et.address_city = gc.address_city
+ORDER BY distance
+LIMIT 10;
+
+\prompt 'Press Enter to continue...' ''
+SELECT 1;
+
+\! clear
