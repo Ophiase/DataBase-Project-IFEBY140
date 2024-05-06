@@ -54,7 +54,17 @@
     "href": "analysis.html#constraints",
     "title": "2  Analyzis",
     "section": "2.5 Constraints",
-    "text": "2.5 Constraints\n\nRealistic implementation expectations\n\ndate_end &gt; date_start\nNOT NULL :\n\nid, url\n(date_start AND date_end) OR (ocurrences)\n\n\nUnrealistic implementation expections\n\nurl must finish with id\nall urls must be valid\naddress must be valid\nphone_number must be valid",
+    "text": "2.5 Constraints\n\nRealistic implementation expectations\n\ndate_end &gt; date_start\nNOT NULL :\n\nid, url\n(date_start AND date_end) OR (ocurrences)\ntitle\n\n\nUnrealistic implementation expections\n\nurl must finish with id\nall urls must be valid\naddress must be valid\nphone_number must be valid\nevery event should have an address, a geographic coordinate and a contact\nNOT NULL\n\na non null lead text, description, date_start, date_end, title_event, price_type",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#triggers",
+    "href": "analysis.html#triggers",
+    "title": "2  Analyzis",
+    "section": "2.6 Triggers",
+    "text": "2.6 Triggers\n\nevent_table.parent_event_id : ON DELETE CASCADE\ntransport.event_id : ON DELETE CASCADE",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
     ]
@@ -63,8 +73,8 @@
     "objectID": "analysis.html#functional-dependencies-after-decomposition",
     "href": "analysis.html#functional-dependencies-after-decomposition",
     "title": "2  Analyzis",
-    "section": "2.6 Functional dependencies after decomposition",
-    "text": "2.6 Functional dependencies after decomposition\n\nRelation : geographic_correspondance\n\naddress_street, address_zipcode, address_city \\(\\to\\) lat, lon\n\nRelation : address_table\n\naddress_name, address_street, address_zipcode, address_city \\(\\to\\) pmr, blind, deaf\n\nRelation : event_table\n\nevent_id \\(\\to\\) event_url, title, lead_text, event_description, date_start, date_end, cover_url, cover_alt, cover_credit, address_name, address_street, address_zipcode, address_city, price_type, price_detail, access_type, access_link, access_link_text, updated_at, image_couverture, programs, title_event, audience, contact_url, contact_phone, contact_mail, contact_facebook, contact_twitter, address_url, address_url_text, address_text, keyword, group_name, parent_event_id\n\nRelation : occurence\n\nevent_id, occurence_date (no functional dependancy)\n\nRelation : tag\n\nevent_id, keyword (no functional dependancy)\n\nRelation : transport\n\nevent_id, transport_type, transport_line, station \\(\\to\\) distance\n\n\n\n2.6.1 Boyce-Codd verification\n\n1NF : Atomicity and no list attributs\n\nChecked\n\n2NF : Attributes cannot depend only on a subpart of the primary key\n\nChecked\n\n3NF : No transitive dependances\n\nChecked\n\nBoyce-Codd : \\(X \\to Y\\) \\(\\implies\\) \\(X\\) is a superkey keyword\n\nChecked",
+    "section": "2.7 Functional dependencies after decomposition",
+    "text": "2.7 Functional dependencies after decomposition\n\nRelation : geographic_correspondance\n\naddress_street, address_zipcode, address_city \\(\\to\\) lat, lon\n\nRelation : address_table\n\naddress_name, address_street, address_zipcode, address_city \\(\\to\\) pmr, blind, deaf\n\nRelation : event_table\n\nevent_id \\(\\to\\) event_url, title, lead_text, event_description, date_start, date_end, cover_url, cover_alt, cover_credit, address_name, address_street, address_zipcode, address_city, price_type, price_detail, access_type, access_link, access_link_text, updated_at, image_couverture, programs, title_event, audience, contact_url, contact_phone, contact_mail, contact_facebook, contact_twitter, address_url, address_url_text, address_text, keyword, group_name, parent_event_id\n\nRelation : occurence\n\nevent_id, occurence_date (no functional dependancy)\n\nRelation : tag\n\nevent_id, keyword (no functional dependancy)\n\nRelation : transport\n\nevent_id, transport_type, transport_line, station \\(\\to\\) distance\n\n\n\n2.7.1 Boyce-Codd verification\n\n1NF : Atomicity and no list attributs\n\nChecked\n\n2NF : Attributes cannot depend only on a subpart of the primary key\n\nChecked\n\n3NF : No transitive dependances\n\nChecked\n\nBoyce-Codd : \\(X \\to Y\\) \\(\\implies\\) \\(X\\) is a superkey keyword\n\nChecked",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
     ]
@@ -73,8 +83,8 @@
     "objectID": "analysis.html#indexes",
     "href": "analysis.html#indexes",
     "title": "2  Analyzis",
-    "section": "2.7 Indexes",
-    "text": "2.7 Indexes\nWe often want to identify events using :\n\nthe title\n\nevent_table (title)\nevent_table (title_event)\n\n\nthe period\n\nevent_table (date_begin)\nevent_table (date_end)\n\nthe arrondissement of Paris\n\nevent_table (address_zipcode)\n\nusing the url\n\nevent_table (event_url)\n\nevent_table (parent_event_id)\n\nWe also want to do agregations on keyword :\n\ntag (keyword)",
+    "section": "2.8 Indexes",
+    "text": "2.8 Indexes\nWe often want to identify events using :\n\nthe title\n\nevent_table (title)\nevent_table (title_event)\n\n\nthe period\n\nevent_table (date_begin)\nevent_table (date_end)\n\nthe arrondissement of Paris\n\nevent_table (address_zipcode)\n\nusing the url\n\nevent_table (event_url)\n\nevent_table (parent_event_id)\n\nWe also want to do agregations on keywords :\n\ntag (keyword)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Analyzis</span>"
     ]

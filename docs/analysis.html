@@ -186,11 +186,12 @@ window.Quarto = {
   </ul></li>
   <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous"><span class="header-section-number">2.4</span> Miscellaneous</a></li>
   <li><a href="#constraints" id="toc-constraints" class="nav-link" data-scroll-target="#constraints"><span class="header-section-number">2.5</span> Constraints</a></li>
-  <li><a href="#functional-dependencies-after-decomposition" id="toc-functional-dependencies-after-decomposition" class="nav-link" data-scroll-target="#functional-dependencies-after-decomposition"><span class="header-section-number">2.6</span> Functional dependencies after decomposition</a>
+  <li><a href="#triggers" id="toc-triggers" class="nav-link" data-scroll-target="#triggers"><span class="header-section-number">2.6</span> Triggers</a></li>
+  <li><a href="#functional-dependencies-after-decomposition" id="toc-functional-dependencies-after-decomposition" class="nav-link" data-scroll-target="#functional-dependencies-after-decomposition"><span class="header-section-number">2.7</span> Functional dependencies after decomposition</a>
   <ul class="collapse">
-  <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.6.1</span> Boyce-Codd verification</a></li>
+  <li><a href="#boyce-codd-verification" id="toc-boyce-codd-verification" class="nav-link" data-scroll-target="#boyce-codd-verification"><span class="header-section-number">2.7.1</span> Boyce-Codd verification</a></li>
   </ul></li>
-  <li><a href="#indexes" id="toc-indexes" class="nav-link" data-scroll-target="#indexes"><span class="header-section-number">2.7</span> Indexes</a></li>
+  <li><a href="#indexes" id="toc-indexes" class="nav-link" data-scroll-target="#indexes"><span class="header-section-number">2.8</span> Indexes</a></li>
   </ul>
 </nav>
     </div>
@@ -217,7 +218,7 @@ window.Quarto = {
 
 
 <p>Initial Columns :</p>
-<div id="5f2999fa" class="cell" data-execution_count="3">
+<div id="0d37cacf" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>['ID' 'URL' 'Titre' 'Chapeau' 'Description' 'Date de début' 'Date de fin'
  'Occurrences' 'Description de la date' "URL de l'image"
@@ -302,6 +303,7 @@ window.Quarto = {
 <ul>
 <li>id, url</li>
 <li>(date_start AND date_end) OR (ocurrences)</li>
+<li>title</li>
 </ul></li>
 </ul></li>
 <li>Unrealistic implementation expections
@@ -310,11 +312,23 @@ window.Quarto = {
 <li>all urls must be valid</li>
 <li>address must be valid</li>
 <li>phone_number must be valid</li>
+<li>every event should have an address, a geographic coordinate and a contact</li>
+<li>NOT NULL
+<ul>
+<li>a non null lead text, description, date_start, date_end, title_event, price_type</li>
+</ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="functional-dependencies-after-decomposition" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="functional-dependencies-after-decomposition"><span class="header-section-number">2.6</span> Functional dependencies after decomposition</h2>
+<section id="triggers" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="triggers"><span class="header-section-number">2.6</span> Triggers</h2>
+<ul>
+<li>event_table.parent_event_id : ON DELETE CASCADE</li>
+<li>transport.event_id : ON DELETE CASCADE</li>
+</ul>
+</section>
+<section id="functional-dependencies-after-decomposition" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="functional-dependencies-after-decomposition"><span class="header-section-number">2.7</span> Functional dependencies after decomposition</h2>
 <ul>
 <li>Relation : <strong>geographic_correspondance</strong>
 <ul>
@@ -341,8 +355,8 @@ window.Quarto = {
 <li><u>event_id, transport_type, transport_line, station</u> <span class="math inline">\(\to\)</span> distance</li>
 </ul></li>
 </ul>
-<section id="boyce-codd-verification" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1" class="anchored" data-anchor-id="boyce-codd-verification"><span class="header-section-number">2.6.1</span> Boyce-Codd verification</h3>
+<section id="boyce-codd-verification" class="level3" data-number="2.7.1">
+<h3 data-number="2.7.1" class="anchored" data-anchor-id="boyce-codd-verification"><span class="header-section-number">2.7.1</span> Boyce-Codd verification</h3>
 <ul>
 <li>1NF : Atomicity and no list attributs
 <ul>
@@ -363,8 +377,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="indexes" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="indexes"><span class="header-section-number">2.7</span> Indexes</h2>
+<section id="indexes" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="indexes"><span class="header-section-number">2.8</span> Indexes</h2>
 <p>We often want to identify events using :</p>
 <ul>
 <li>the title
@@ -388,7 +402,7 @@ window.Quarto = {
 </ul></li>
 <li>event_table (parent_event_id)</li>
 </ul>
-<p>We also want to do agregations on keyword :</p>
+<p>We also want to do agregations on keywords :</p>
 <ul>
 <li>tag (keyword)</li>
 </ul>
