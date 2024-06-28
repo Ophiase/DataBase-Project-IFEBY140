@@ -37,7 +37,7 @@ Vélib -> Lacuée - Lyon (121.91m)
     - use ``split_part`` over ``->`` and ``:``
 4. ``Vélib`` case
     - If station is empty, it means it is a ``Vélib``, and the station was wrongly splited into transport_line.
-    Then we swawp ``station`` and ``transport_line``
+    Then we swap ``station`` and ``transport_line``
 5. Extract distance
     - It can be done using a combination of ``substring``, ``reverse`` and ``length`` functions.
     - Distance information is always between the last occurence of ``(`` and ``m)``.

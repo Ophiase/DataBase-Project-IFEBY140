@@ -218,7 +218,7 @@ window.Quarto = {
 
 
 <p>Initial Columns :</p>
-<div id="d58a1478" class="cell" data-execution_count="3">
+<div id="ee40929c" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>['ID' 'URL' 'Titre' 'Chapeau' 'Description' 'Date de début' 'Date de fin'
  'Occurrences' 'Description de la date' "URL de l'image"
@@ -240,13 +240,13 @@ window.Quarto = {
 </section>
 <section id="first-normal-form" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="first-normal-form"><span class="header-section-number">2.2</span> First Normal Form</h2>
-<p>Non atomic attributs :</p>
+<p>Non atomic attributes :</p>
 <ul>
 <li>List
 <ul>
 <li>Occurences : separated by <code>'_'</code> (underscore)</li>
 <li>Tags : separated by <code>','</code></li>
-<li>Childrens : separated by <code>','</code></li>
+<li>“Children<del>s</del>” : separated by <code>','</code></li>
 <li>Transport : separated by <code>'\n'</code></li>
 </ul></li>
 <li>Multiple attributes
@@ -261,7 +261,7 @@ window.Quarto = {
 <ul>
 <li>id <span class="math inline">\(\to\)</span> url
 <ul>
-<li>For simplicty sake, we consider that we cannot deduce id from url. Perhaps, we will use this property to identify sub_events_id in “childrens”</li>
+<li>For simplicty sake, we consider that we cannot deduce id from url. We may use this property to identify sub_events_id in “children<del>s</del>”</li>
 </ul></li>
 <li>id <span class="math inline">\(\to\)</span> titre, chapeau, description, date_de_debut, date_de_fin, occurences, url_de_l_image, texte_alternatif_de_l_image, credit_de_l_image, mots_clefs, nom_du_lieu, adresse_du_lieu, code_postale, ville, url_du_contact, telephone_de_contact, email_de_contact, url_facebook_associee, url_twitter_associe, type_de_prix, detail_du_prix, type_d_acces, url_de_reservation, url_de_reservation_texte, date_de_mise_a_jour, image_de_couverture, programmes, en_ligne_address_url, en_ligne_address_url_text, en_ligne_address_text, title_event, audience, childrens, groupe, transport_type, transport_line, station, distance</li>
 <li>date_de_debut, date_de_fin <span class="math inline">\(\to\)</span> description_de_la_date

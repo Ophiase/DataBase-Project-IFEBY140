@@ -2,13 +2,13 @@
 title: Introduction
 ---
 \
-**[Que Faire à Paris ?](https://www.paris.fr/quefaire)** is a french website that list events happing in Paris. 
+**[Que Faire à Paris ?](https://www.paris.fr/quefaire)** is a French website that lists events happening in Paris.
 
-The event are archived at this [address](https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/information/?disjunctive.tags&disjunctive.address_name&disjunctive.address_zipcode&disjunctive.address_city&disjunctive.pmr&disjunctive.blind&disjunctive.deaf&disjunctive.price_type&disjunctive.access_type&disjunctive.programs) in multiple formats including csv.
+The events are archived at this [address](https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/information/?disjunctive.tags&disjunctive.address_name&disjunctive.address_zipcode&disjunctive.address_city&disjunctive.pmr&disjunctive.blind&disjunctive.deaf&disjunctive.price_type&disjunctive.access_type&disjunctive.programs) in multiple formats including CSV.
 
-In this project we propose a normalized database to store the events based on the csv archive.
+In this project, we propose a normalized database to store the events based on the CSV archive.
 
-Course constraint :
+Course Constraint
 
-> Code everything in psql. \
-> Don't use pgsql functions to extract the data.
+> Code everything in SQL.  
+> Don't use pgSQL functions to extract the data.

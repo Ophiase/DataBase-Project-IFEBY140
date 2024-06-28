@@ -33,12 +33,12 @@ We will remove the following attributes : description_de_la_date
 
 ## First Normal Form
 
-Non atomic attributs :
+Non atomic attributes :
 
 - List
     - Occurences : separated by ``'_'`` (underscore)
     - Tags : separated by ``','``
-    - Childrens : separated by ``','``
+    - "Children<del>s</del>" : separated by ``','``
     - Transport : separated by ``'\n'``
 - Multiple attributes
     - Transport : transport_type,  transport_line, station, distance
@@ -46,7 +46,7 @@ Non atomic attributs :
 
 ## Functional dependencies :
 - id $\to$ url 
-    - For simplicty sake, we consider that we cannot deduce id from url. Perhaps, we will use this property to identify sub_events_id in "childrens"
+    - For simplicty sake, we consider that we cannot deduce id from url. We may use this property to identify sub_events_id in "children<del>s</del>"
 - id $\to$ titre, chapeau, description, date_de_debut, date_de_fin, occurences, url_de_l_image, texte_alternatif_de_l_image, credit_de_l_image, mots_clefs, nom_du_lieu, adresse_du_lieu, code_postale, ville, url_du_contact, telephone_de_contact, email_de_contact, url_facebook_associee, url_twitter_associe, type_de_prix, detail_du_prix, type_d_acces, url_de_reservation, url_de_reservation_texte, date_de_mise_a_jour, image_de_couverture, programmes, en_ligne_address_url, en_ligne_address_url_text, en_ligne_address_text, title_event, audience, childrens, groupe, transport_type,  transport_line, station, distance
 - date_de_debut, date_de_fin $\to$ description_de_la_date
     - Removed attribute
